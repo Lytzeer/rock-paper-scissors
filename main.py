@@ -2,6 +2,8 @@
 
 from random import choice, seed
 from rich import print
+from rich.panel import Panel
+from rich.console import Console
 
 
 def computer_choice():
@@ -13,7 +15,8 @@ def computer_choice():
 
 def player_choice():
     choices = ["rock", "paper", "scissors"]
-    return choices[int(input("Choose 1 for rock, 2 for paper, or 3 for scissors: "))-1]
+    display_choices()
+    return choices[int(input("Your choice : "))-1]
 
 
 def check_winner(p_choice,c_choice):
@@ -39,9 +42,14 @@ def round_number():
 
 
 def display_choices():
-    print("0: Rock")
-    print("1: Paper")
-    print("2: Scissors")
+    print(
+        Panel(
+            "[white]1. Rock\n2. Paper\n3. Scissors[/white]",
+            style="bold blue",
+            title="Choices",
+            expand=False,
+        )
+    )
 
 
 def display_all_choices(p_choice, c_choice):
@@ -53,12 +61,18 @@ def display_winner(winner):
 
 
 def display_final_winner(player_wins, computer_wins):
+    clear_screen()
     if player_wins > computer_wins:
         print(f"[bold blue]Player win the game![/bold blue] Score: {player_wins} - {computer_wins}")
     elif player_wins == computer_wins:
         print(f"[bold blue]Tie game![/bold blue] Score: {player_wins} - {computer_wins}")
     else:
         print(f"[bold blue]Computer win the game![/bold blue] Score: {player_wins} - {computer_wins}")
+
+
+def clear_screen():
+    console = Console()
+    console.clear()
 
 
 def main():
